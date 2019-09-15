@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tone.LibraryManagement.Data.Entities;
@@ -11,16 +12,19 @@ namespace Tone.LibraryManagement.WebApi.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IRepository<Book> _repo;
+        private readonly ILogger _logger;
 
-        public BooksController(IRepository<Book> repo)
+        public BooksController(IRepository<Book> repo, ILogger<BooksController> logger)
         {
             _repo = repo;
+            _logger = logger;
         }
 
         // GET api/values
         [HttpGet]
         public async Task<ActionResult<List<Book>>> Get()
         {
+            _logger.LogInformation("Get all books was called within WebApi");
             return await _repo.GetAll();
         }
 
