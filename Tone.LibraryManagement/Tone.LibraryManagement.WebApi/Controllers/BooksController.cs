@@ -14,6 +14,7 @@ namespace Tone.LibraryManagement.WebApi.Controllers
         private readonly IRepository<Book> _repo;
         private readonly ILogger _logger;
 
+        //logging reference https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-2.2
         public BooksController(IRepository<Book> repo, ILogger<BooksController> logger)
         {
             _repo = repo;
