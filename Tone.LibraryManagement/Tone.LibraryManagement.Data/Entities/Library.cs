@@ -2,10 +2,8 @@
 
 namespace Tone.LibraryManagement.Data.Entities
 {
-    public class Library
+    public class Library: BaseEntity
     {
-        [Key]
-        public int LibraryId { get; set; }
         public int LocationId { get; set; }
     }
 }

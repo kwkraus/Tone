@@ -2,11 +2,9 @@
 
 namespace Tone.LibraryManagement.Data.Entities
 {
-    public class User
+    public class User : BaseEntity
     {
-        [Key]
-        public int UserId { get; set; }
-        public int RoleId { get; set; }
+        public Role Role { get; set; }
         public int LocationId { get; set; }
     }
 }

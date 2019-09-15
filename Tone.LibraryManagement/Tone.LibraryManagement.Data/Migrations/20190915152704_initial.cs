@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Tone.LibraryManagement.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,63 +12,49 @@ namespace Tone.LibraryManagement.Data.Migrations
                 name: "Books",
                 columns: table => new
                 {
-                    BookId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(maxLength: 200, nullable: false),
                     Author = table.Column<string>(maxLength: 100, nullable: false),
                     Genre = table.Column<string>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(6, 2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Books", x => x.BookId);
+                    table.PrimaryKey("PK_Books", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Libraries",
                 columns: table => new
                 {
-                    LibraryId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     LocationId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Libraries", x => x.LibraryId);
+                    table.PrimaryKey("PK_Libraries", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
-                    RoleId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Roles", x => x.RoleId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RoleId = table.Column<int>(nullable: false),
-                    LocationId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "BookLibraryAssociations",
                 columns: table => new
                 {
-                    BookLibraryAssociationId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BookId = table.Column<int>(nullable: true),
                     LibraryId = table.Column<int>(nullable: true),
@@ -77,18 +63,38 @@ namespace Tone.LibraryManagement.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookLibraryAssociations", x => x.BookLibraryAssociationId);
+                    table.PrimaryKey("PK_BookLibraryAssociations", x => x.Id);
                     table.ForeignKey(
                         name: "FK_BookLibraryAssociations_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
-                        principalColumn: "BookId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_BookLibraryAssociations_Libraries_LibraryId",
                         column: x => x.LibraryId,
                         principalTable: "Libraries",
-                        principalColumn: "LibraryId",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RoleId = table.Column<int>(nullable: true),
+                    LocationId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -109,13 +115,13 @@ namespace Tone.LibraryManagement.Data.Migrations
                         name: "FK_UserBookAssociation_BookLibraryAssociations_BookLibraryAssociationId",
                         column: x => x.BookLibraryAssociationId,
                         principalTable: "BookLibraryAssociations",
-                        principalColumn: "BookLibraryAssociationId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_UserBookAssociation_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -138,13 +144,15 @@ namespace Tone.LibraryManagement.Data.Migrations
                 name: "IX_UserBookAssociation_UserId",
                 table: "UserBookAssociation",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_RoleId",
+                table: "Users",
+                column: "RoleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Roles");
-
             migrationBuilder.DropTable(
                 name: "UserBookAssociation");
 
@@ -159,6 +167,9 @@ namespace Tone.LibraryManagement.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Libraries");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }

@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Tone.LibraryManagement.Data.Contexts;
 using Tone.LibraryManagement.Data.Entities;
+using Tone.LibraryManagement.Data.Repositories;
 
 namespace Tone.LibraryManagement.WebApi.Controllers
 {
@@ -12,25 +10,25 @@ namespace Tone.LibraryManagement.WebApi.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly LibraryMgmtContext _context;
+        private readonly IRepository<Book> _repo;
 
-        public BooksController(LibraryMgmtContext context)
+        public BooksController(IRepository<Book> repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         // GET api/values
         [HttpGet]
-        public ActionResult<List<Book>> Get()
+        public async Task<ActionResult<List<Book>>> Get()
         {
-            return _context.Books.ToList();
+            return await _repo.GetAll();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> Get(int id)
         {
-            return await _context.Books.FindAsync(id);
+            return await _repo.Get(id);
         }
 
         // POST api/values
@@ -39,8 +37,7 @@ namespace Tone.LibraryManagement.WebApi.Controllers
         {
             //the Book passed in will be automatically validated and 400 (BadRequest) returned.
             //if successful, return 204 (NoContent)
-            await _context.Books.AddAsync(value);
-            await _context.SaveChangesAsync();
+            await _repo.Insert(value);
             return NoContent();
         }
 
@@ -48,8 +45,7 @@ namespace Tone.LibraryManagement.WebApi.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] Book value)
         {
-            _context.Entry(await _context.Books.FirstOrDefaultAsync(x => x.BookId == id)).CurrentValues.SetValues(value);
-            await _context.SaveChangesAsync();
+            await _repo.Update(value);
             return NoContent();
         }
 
@@ -58,9 +54,8 @@ namespace Tone.LibraryManagement.WebApi.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             //must find the book to delete before deleting it from db
-            var bookToDelete = await _context.Books.FindAsync(id);
-            _context.Remove(bookToDelete);
-            await _context.SaveChangesAsync();
+            var bookToDelete = await _repo.Get(id);
+            await _repo.Delete(bookToDelete);
             return NoContent();
         }
     }

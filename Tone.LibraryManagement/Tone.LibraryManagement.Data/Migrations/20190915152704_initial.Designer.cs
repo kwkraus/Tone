@@ -10,8 +10,8 @@ using Tone.LibraryManagement.Data.Contexts;
 namespace Tone.LibraryManagement.Data.Migrations
 {
     [DbContext(typeof(LibraryMgmtContext))]
-    [Migration("20190914154804_Initial")]
-    partial class Initial
+    [Migration("20190915152704_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace Tone.LibraryManagement.Data.Migrations
 
             modelBuilder.Entity("Tone.LibraryManagement.Data.Entities.Book", b =>
                 {
-                    b.Property<int>("BookId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -34,20 +34,21 @@ namespace Tone.LibraryManagement.Data.Migrations
                     b.Property<string>("Genre")
                         .IsRequired();
 
-                    b.Property<decimal>("Price");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(6, 2)");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(200);
 
-                    b.HasKey("BookId");
+                    b.HasKey("Id");
 
                     b.ToTable("Books");
                 });
 
             modelBuilder.Entity("Tone.LibraryManagement.Data.Entities.BookLibraryAssociation", b =>
                 {
-                    b.Property<int>("BookLibraryAssociationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -59,7 +60,7 @@ namespace Tone.LibraryManagement.Data.Migrations
 
                     b.Property<int?>("LibraryId");
 
-                    b.HasKey("BookLibraryAssociationId");
+                    b.HasKey("Id");
 
                     b.HasIndex("BookId");
 
@@ -70,41 +71,43 @@ namespace Tone.LibraryManagement.Data.Migrations
 
             modelBuilder.Entity("Tone.LibraryManagement.Data.Entities.Library", b =>
                 {
-                    b.Property<int>("LibraryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("LocationId");
 
-                    b.HasKey("LibraryId");
+                    b.HasKey("Id");
 
                     b.ToTable("Libraries");
                 });
 
             modelBuilder.Entity("Tone.LibraryManagement.Data.Entities.Role", b =>
                 {
-                    b.Property<int>("RoleId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
 
-                    b.HasKey("RoleId");
+                    b.HasKey("Id");
 
                     b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("Tone.LibraryManagement.Data.Entities.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("LocationId");
 
-                    b.Property<int>("RoleId");
+                    b.Property<int?>("RoleId");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -139,6 +142,13 @@ namespace Tone.LibraryManagement.Data.Migrations
                     b.HasOne("Tone.LibraryManagement.Data.Entities.Library", "Library")
                         .WithMany()
                         .HasForeignKey("LibraryId");
+                });
+
+            modelBuilder.Entity("Tone.LibraryManagement.Data.Entities.User", b =>
+                {
+                    b.HasOne("Tone.LibraryManagement.Data.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId");
                 });
 
             modelBuilder.Entity("Tone.LibraryManagement.Data.Entities.UserBookAssociation", b =>

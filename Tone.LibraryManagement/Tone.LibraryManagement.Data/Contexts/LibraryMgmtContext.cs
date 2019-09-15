@@ -25,6 +25,10 @@ namespace Tone.LibraryManagement.Data.Contexts
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Book>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(6, 2)");
         }
     }
 }

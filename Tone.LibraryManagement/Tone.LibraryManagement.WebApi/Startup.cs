@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Tone.LibraryManagement.Data.Contexts;
+using Tone.LibraryManagement.Data.Entities;
+using Tone.LibraryManagement.Data.Repositories;
 
 namespace Tone.LibraryManagement.WebApi
 {
@@ -25,6 +27,9 @@ namespace Tone.LibraryManagement.WebApi
             services.AddDbContext<LibraryMgmtContext>(
                 options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
             );
+
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient(typeof(DbContext), typeof(LibraryMgmtContext));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
