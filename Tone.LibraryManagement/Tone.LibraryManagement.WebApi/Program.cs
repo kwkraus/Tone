@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Serilog;
 using Serilog.Events;
@@ -19,6 +20,7 @@ namespace Tone.LibraryManagement.WebApi
                         .Enrich.FromLogContext()
                         .WriteTo.Console()
                         .WriteTo.RollingFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Tone\log-{Date}.txt"))
+                        .WriteTo.ApplicationInsights(TelemetryConfiguration.Active, TelemetryConverter.Events)
                         .CreateLogger();
 
             try
@@ -40,6 +42,7 @@ namespace Tone.LibraryManagement.WebApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseApplicationInsights()
                 .UseStartup<Startup>()
                 .UseSerilog();
     }
