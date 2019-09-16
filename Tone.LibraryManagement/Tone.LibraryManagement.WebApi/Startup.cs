@@ -40,7 +40,7 @@ namespace Tone.LibraryManagement.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSerilogRequestLogging();
+            //app.UseSerilogRequestLogging();
             app.UseMvc();
         }
     }
