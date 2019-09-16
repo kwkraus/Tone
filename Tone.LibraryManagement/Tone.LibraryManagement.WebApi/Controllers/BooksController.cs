@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Tone.LibraryManagement.Data.Entities;
 using Tone.LibraryManagement.Data.Repositories;
 
@@ -22,46 +21,51 @@ namespace Tone.LibraryManagement.WebApi.Controllers
 
         }
 
-        // GET api/values
+        // GET api/books
         [HttpGet]
-        public async Task<ActionResult<List<Book>>> Get()
+        public ActionResult<List<Book>> Get()
         {
             _logger.LogInformation("Get all books was called within WebApi");
-            return await _repo.GetAll();
+            return _repo.GetAll();
         }
 
-        // GET api/values/5
+        // GET api/books/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Book>> Get(int id)
+        public ActionResult<Book> Get(int id)
         {
-            return await _repo.Get(id);
+            var book = _repo.Get(id);
+
+            if (book == null)
+                return NotFound();
+
+            return book;
         }
 
-        // POST api/values
+        // POST api/books
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] Book value)
+        public ActionResult Post([FromBody] Book value)
         {
             //the Book passed in will be automatically validated and 400 (BadRequest) returned.
             //if successful, return 204 (NoContent)
-            await _repo.Insert(value);
+            _repo.Insert(value);
             return NoContent();
         }
 
-        // PUT api/values/5
+        // PUT api/books/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] Book value)
+        public ActionResult Put(int id, [FromBody] Book value)
         {
-            await _repo.Update(value);
+            _repo.Update(value);
             return NoContent();
         }
 
-        // DELETE api/values/5
+        // DELETE api/books/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public ActionResult Delete(int id)
         {
             //must find the book to delete before deleting it from db
-            var bookToDelete = await _repo.Get(id);
-            await _repo.Delete(bookToDelete);
+            var bookToDelete = _repo.Get(id);
+            _repo.Delete(bookToDelete);
             return NoContent();
         }
     }

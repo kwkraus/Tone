@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Tone.LibraryManagement.Data.Contexts;
+using System.Linq;
 using Tone.LibraryManagement.Data.Entities;
 
 namespace Tone.LibraryManagement.Data.Repositories
@@ -17,32 +16,32 @@ namespace Tone.LibraryManagement.Data.Repositories
             _entities = _context.Set<T>();
         }
 
-        public async Task<List<T>> GetAll()
+        public List<T> GetAll()
         {
-            return await _entities.ToListAsync();
+            return _entities.ToList();
         }
 
-        public async Task Delete(T entity)
+        public void Delete(T entity)
         {
             _entities.Remove(entity);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public async Task<T> Get(int id)
+        public T Get(int id)
         {
-            return await _entities.FindAsync(id);
+            return _entities.Find(id);
         }
 
-        public async Task Insert(T entity)
+        public void Insert(T entity)
         {
-            await _entities.AddAsync(entity);
-            await _context.SaveChangesAsync();
+            _entities.Add(entity);
+            _context.SaveChanges();
         }
 
-        public async Task Update(T entity)
+        public void Update(T entity)
         {
-            _context.Entry(await _entities.FirstOrDefaultAsync(x => x.Id == entity.Id)).CurrentValues.SetValues(entity);
-            await _context.SaveChangesAsync();
+            _context.Entry(_entities.FirstOrDefault(x => x.Id == entity.Id)).CurrentValues.SetValues(entity);
+            _context.SaveChanges();
         }
     }
 }
