@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using Tone.LibraryManagement.Data.Entities;
+using Tone.LibraryManagement.Core.Entities;
+using Tone.LibraryManagement.Core.Repositories;
 
 namespace Tone.LibraryManagement.Data.Repositories
 {

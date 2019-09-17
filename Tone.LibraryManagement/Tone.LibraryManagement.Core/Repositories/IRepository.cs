@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Tone.LibraryManagement.Data.Entities;
+using Tone.LibraryManagement.Core.Entities;
 
-namespace Tone.LibraryManagement.Data.Repositories
+namespace Tone.LibraryManagement.Core.Repositories
 {
     public interface IRepository<T> where T : BaseEntity
     {

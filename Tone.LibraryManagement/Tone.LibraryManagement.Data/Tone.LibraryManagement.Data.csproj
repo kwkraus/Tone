@@ -13,4 +13,8 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Tone.LibraryManagement.Core\Tone.LibraryManagement.Core.csproj" />
+  </ItemGroup>
+
 </Project>

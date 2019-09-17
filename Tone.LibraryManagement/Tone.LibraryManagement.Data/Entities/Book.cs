@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Tone.LibraryManagement.Core.Entities;
 
 namespace Tone.LibraryManagement.Data.Entities
 {

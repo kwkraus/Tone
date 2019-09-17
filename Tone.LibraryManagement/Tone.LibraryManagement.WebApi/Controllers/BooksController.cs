@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using Tone.LibraryManagement.Core.Repositories;
 using Tone.LibraryManagement.Data.Entities;
-using Tone.LibraryManagement.Data.Repositories;
 
 namespace Tone.LibraryManagement.WebApi.Controllers
 {
