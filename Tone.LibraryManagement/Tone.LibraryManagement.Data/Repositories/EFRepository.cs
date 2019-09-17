@@ -6,12 +6,12 @@ using Tone.LibraryManagement.Core.Repositories;
 
 namespace Tone.LibraryManagement.Data.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : BaseEntity
+    public class EFRepository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly DbContext _context;
         private readonly DbSet<T> _entities;
 
-        public Repository(DbContext context)
+        public EFRepository(DbContext context)
         {
             _context = context;
             _entities = _context.Set<T>();

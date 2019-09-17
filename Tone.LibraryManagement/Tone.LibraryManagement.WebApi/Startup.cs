@@ -28,7 +28,7 @@ namespace Tone.LibraryManagement.WebApi
                 options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
             );
 
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient(typeof(IRepository<>), typeof(EFRepository<>));
             services.AddTransient(typeof(DbContext), typeof(LibraryMgmtContext));
         }
 
