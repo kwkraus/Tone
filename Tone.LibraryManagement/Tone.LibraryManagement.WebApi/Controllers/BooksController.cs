@@ -55,6 +55,7 @@ namespace Tone.LibraryManagement.WebApi.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Book value)
         {
+            _logger.LogInformation($"updated the book with id={id}");
             _repo.Update(value);
             return NoContent();
         }

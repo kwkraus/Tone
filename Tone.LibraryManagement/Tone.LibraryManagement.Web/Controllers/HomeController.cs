@@ -10,8 +10,8 @@ namespace Tone.LibraryManagement.Web.Controllers
         public IActionResult Index()
         {
             var client = new TelemetryClient();
-
-            client.TrackEvent("This is an event from the telemetry client for my demo with Tamar Zamba");
+            
+            client.TrackEvent("This is an event from the telemetry client for my demo with Ashley Shorter");
 
             return View();
         }
