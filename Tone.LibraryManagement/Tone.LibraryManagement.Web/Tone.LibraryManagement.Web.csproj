@@ -17,6 +17,12 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\Tone.LibraryManagement.Core\Tone.LibraryManagement.Core.csproj" />
+    <ProjectReference Include="..\Tone.LibraryManagement.Services\Tone.LibraryManagement.Services.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
     <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
