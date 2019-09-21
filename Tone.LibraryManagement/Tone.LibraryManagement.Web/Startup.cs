@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Tone.LibraryManagement.Core.Services;
 using Tone.LibraryManagement.Services;
+using Tone.LibraryManagement.Services.Options;
 
 namespace Tone.LibraryManagement.Web
 {
@@ -34,6 +35,7 @@ namespace Tone.LibraryManagement.Web
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.Configure<AzureStorageOptions>(Configuration.GetSection("AzureStorage"));
 
             services.AddTransient(typeof(IFileStorageService), typeof(AzBlobFileStorageService));
         }
