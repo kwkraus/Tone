@@ -1,4 +1,4 @@
-﻿namespace Tone.LibraryManagement.Services.Options
+﻿namespace Tone.LibraryManagement.Azure.Services.Options
 {
     public class AzureStorageOptions
     {

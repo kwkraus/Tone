@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Tone.LibraryManagement.Core.Services;
 
-namespace Tone.LibraryManagement.Services
+namespace Tone.LibraryManagement.Azure.Services
 {
     public class AzBlobFileStorageService : IFileStorageService
     {

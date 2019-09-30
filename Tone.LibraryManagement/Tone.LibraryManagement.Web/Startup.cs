@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SERVCON.Common.Services;
+using Tone.LibraryManagement.Azure.Services;
+using Tone.LibraryManagement.Azure.Services.Options;
 using Tone.LibraryManagement.Core.Services;
 using Tone.LibraryManagement.Data.Contexts;
-using Tone.LibraryManagement.Services.Options;
 
 namespace Tone.LibraryManagement.Web
 {

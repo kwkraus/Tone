@@ -4,10 +4,10 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Tone.LibraryManagement.Azure.Services.Options;
 using Tone.LibraryManagement.Core.Services;
-using Tone.LibraryManagement.Services.Options;
 
-namespace SERVCON.Common.Services
+namespace Tone.LibraryManagement.Azure.Services
 {
     public class AzureStorageService : IStorageService
     {
