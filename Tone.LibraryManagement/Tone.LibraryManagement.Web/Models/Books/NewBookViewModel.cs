@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Tone.LibraryManagement.Core.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
-namespace Tone.LibraryManagement.Data.Entities
+namespace Tone.LibraryManagement.Web.Models.Books
 {
-    public class Book : BaseEntity
+    public class NewBookViewModel
     {
-        //Used DataAnnotations to define the entity validation rules
-        //https://www.learnentityframeworkcore.com/configuration/data-annotation-attributes
         [Required]
         [MaxLength(200)]
         public string Title { get; set; }
@@ -17,5 +15,6 @@ namespace Tone.LibraryManagement.Data.Entities
         public string Genre { get; set; }
         public decimal Price { get; set; }
         public string CoverPicture { get; set; }
+        public IFormFile CoverPictureImage{ get; set; }
     }
 }

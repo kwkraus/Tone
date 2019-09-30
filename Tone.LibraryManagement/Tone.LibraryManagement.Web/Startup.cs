@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SERVCON.Common.Services;
 using Tone.LibraryManagement.Core.Services;
-using Tone.LibraryManagement.Services;
+using Tone.LibraryManagement.Data.Contexts;
 using Tone.LibraryManagement.Services.Options;
 
 namespace Tone.LibraryManagement.Web
@@ -33,11 +31,15 @@ namespace Tone.LibraryManagement.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDbContext<LibraryMgmtContext>(
+                options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
+            );
+
             services.Configure<AzureStorageOptions>(Configuration.GetSection("AzureStorage"));
 
-            services.AddTransient(typeof(IFileStorageService), typeof(AzBlobFileStorageService));
+            services.AddTransient(typeof(IStorageService), typeof(AzureStorageService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tone.LibraryManagement.Core\Tone.LibraryManagement.Core.csproj" />
+    <ProjectReference Include="..\Tone.LibraryManagement.Data\Tone.LibraryManagement.Data.csproj" />
     <ProjectReference Include="..\Tone.LibraryManagement.Services\Tone.LibraryManagement.Services.csproj" />
   </ItemGroup>
 
