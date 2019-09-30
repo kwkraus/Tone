@@ -1,10 +1,9 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Tone.LibraryManagement.Data.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,12 +11,12 @@ namespace Tone.LibraryManagement.Data.Migrations
                 name: "Books",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<Guid>(nullable: false),
                     Title = table.Column<string>(maxLength: 200, nullable: false),
                     Author = table.Column<string>(maxLength: 100, nullable: false),
                     Genre = table.Column<string>(nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(6, 2)", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(6, 2)", nullable: false),
+                    CoverPicture = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,8 +27,7 @@ namespace Tone.LibraryManagement.Data.Migrations
                 name: "Libraries",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<Guid>(nullable: false),
                     LocationId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -41,8 +39,7 @@ namespace Tone.LibraryManagement.Data.Migrations
                 name: "Roles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -54,10 +51,9 @@ namespace Tone.LibraryManagement.Data.Migrations
                 name: "BookLibraryAssociations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BookId = table.Column<int>(nullable: true),
-                    LibraryId = table.Column<int>(nullable: true),
+                    Id = table.Column<Guid>(nullable: false),
+                    BookId = table.Column<Guid>(nullable: true),
+                    LibraryId = table.Column<Guid>(nullable: true),
                     IsAvailable = table.Column<bool>(nullable: false),
                     IsCheckedOut = table.Column<bool>(nullable: false)
                 },
@@ -82,9 +78,8 @@ namespace Tone.LibraryManagement.Data.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RoleId = table.Column<int>(nullable: true),
+                    Id = table.Column<Guid>(nullable: false),
+                    RoleId = table.Column<Guid>(nullable: true),
                     LocationId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -102,10 +97,9 @@ namespace Tone.LibraryManagement.Data.Migrations
                 name: "UserBookAssociation",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(nullable: true),
-                    BookLibraryAssociationId = table.Column<int>(nullable: true),
+                    Id = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: true),
+                    BookLibraryAssociationId = table.Column<Guid>(nullable: true),
                     DueDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

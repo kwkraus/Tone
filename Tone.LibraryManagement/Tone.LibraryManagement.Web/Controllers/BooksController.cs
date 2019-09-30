@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Tone.LibraryManagement.Core.Services;
@@ -38,6 +39,7 @@ namespace Tone.LibraryManagement.Web.Controllers
 
             var newBook = new Book
             {
+                Id = Guid.NewGuid(),
                 Title = model.Title,
                 Author = model.Author,
                 Genre = model.Genre,
@@ -49,9 +51,9 @@ namespace Tone.LibraryManagement.Web.Controllers
                 await model.CoverPictureImage.CopyToAsync(memoryStream);
 
                 var picLocation = await _storage.UploadFileStreamAsync(
-                    memoryStream, 
+                    memoryStream,
                     "CoverPhotos".ToLower(),
-                    model.CoverPictureImage.FileName);
+                    newBook.Id.ToString());
 
                 newBook.CoverPicture = picLocation;
             }

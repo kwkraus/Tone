@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using Tone.LibraryManagement.Core.Repositories;
 using Tone.LibraryManagement.Data.Entities;
@@ -31,7 +32,7 @@ namespace Tone.LibraryManagement.WebApi.Controllers
 
         // GET api/books/5
         [HttpGet("{id}")]
-        public ActionResult<Book> Get(int id)
+        public ActionResult<Book> Get(Guid id)
         {
             var book = _repo.Get(id);
 
@@ -53,7 +54,7 @@ namespace Tone.LibraryManagement.WebApi.Controllers
 
         // PUT api/books/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Book value)
+        public ActionResult Put(Guid id, [FromBody] Book value)
         {
             _logger.LogInformation($"updated the book with id={id}");
             _repo.Update(value);
@@ -62,7 +63,7 @@ namespace Tone.LibraryManagement.WebApi.Controllers
 
         // DELETE api/books/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
             //must find the book to delete before deleting it from db
             var bookToDelete = _repo.Get(id);

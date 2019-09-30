@@ -10,8 +10,8 @@ using Tone.LibraryManagement.Data.Contexts;
 namespace Tone.LibraryManagement.Data.Migrations
 {
     [DbContext(typeof(LibraryMgmtContext))]
-    [Migration("20190930204201_CoverPageField")]
-    partial class CoverPageField
+    [Migration("20190930215344_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,9 +23,8 @@ namespace Tone.LibraryManagement.Data.Migrations
 
             modelBuilder.Entity("Tone.LibraryManagement.Data.Entities.Book", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Author")
                         .IsRequired()
@@ -50,17 +49,16 @@ namespace Tone.LibraryManagement.Data.Migrations
 
             modelBuilder.Entity("Tone.LibraryManagement.Data.Entities.BookLibraryAssociation", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BookId");
+                    b.Property<Guid?>("BookId");
 
                     b.Property<bool>("IsAvailable");
 
                     b.Property<bool>("IsCheckedOut");
 
-                    b.Property<int?>("LibraryId");
+                    b.Property<Guid?>("LibraryId");
 
                     b.HasKey("Id");
 
@@ -73,9 +71,8 @@ namespace Tone.LibraryManagement.Data.Migrations
 
             modelBuilder.Entity("Tone.LibraryManagement.Data.Entities.Library", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("LocationId");
 
@@ -86,9 +83,8 @@ namespace Tone.LibraryManagement.Data.Migrations
 
             modelBuilder.Entity("Tone.LibraryManagement.Data.Entities.Role", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
@@ -99,13 +95,12 @@ namespace Tone.LibraryManagement.Data.Migrations
 
             modelBuilder.Entity("Tone.LibraryManagement.Data.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("LocationId");
 
-                    b.Property<int?>("RoleId");
+                    b.Property<Guid?>("RoleId");
 
                     b.HasKey("Id");
 
@@ -116,15 +111,14 @@ namespace Tone.LibraryManagement.Data.Migrations
 
             modelBuilder.Entity("Tone.LibraryManagement.Data.Entities.UserBookAssociation", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BookLibraryAssociationId");
+                    b.Property<Guid?>("BookLibraryAssociationId");
 
                     b.Property<DateTime>("DueDate");
 
-                    b.Property<int?>("UserId");
+                    b.Property<Guid?>("UserId");
 
                     b.HasKey("Id");
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Tone.LibraryManagement.Core.Entities;
@@ -28,7 +29,7 @@ namespace Tone.LibraryManagement.Data.Repositories
             _context.SaveChanges();
         }
 
-        public T Get(int id)
+        public T Get(Guid id)
         {
             return _entities.Find(id);
         }
