@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Tone.LibraryManagement.Core.Services;
 using Tone.LibraryManagement.Data.Contexts;
@@ -22,7 +23,7 @@ namespace Tone.LibraryManagement.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_context.Books.ToList());
         }
 
         [HttpGet]
