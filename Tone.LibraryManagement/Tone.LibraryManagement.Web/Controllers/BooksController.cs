@@ -58,9 +58,9 @@ namespace Tone.LibraryManagement.Web.Controllers
                 await model.CoverPictureImage.CopyToAsync(memoryStream);
 
                 var picLocation = await _storage.UploadFileStreamAsync(
-                    memoryStream,
-                    "CoverPhotos".ToLower(),
-                    newBook.Id.ToString());
+                    memoryStream,  //image data
+                    "CoverPhotos".ToLower(),  //name of container in Azure Storage to put image file
+                    $"{newBook.Id.ToString()}{Path.GetExtension(model.CoverPictureImage.FileName)}");  //name of image file to store in defined container.  this will match Book.Id for easy correlation
 
                 //make sure to save the URI location of the image in Azure Storage to the Book Entity
                 newBook.CoverPicture = picLocation;
