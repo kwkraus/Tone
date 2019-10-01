@@ -35,9 +35,12 @@ namespace Tone.LibraryManagement.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(NewBookViewModel model)
         {
+            //https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-3.0
             if (!ModelState.IsValid)
                 return BadRequest();
 
+            //Book class is an entity in Data project, here we map the ViewModel to the Book entity
+            //for saving into db using EF Core
             var newBook = new Book
             {
                 Id = Guid.NewGuid(),
@@ -47,6 +50,9 @@ namespace Tone.LibraryManagement.Web.Controllers
                 Price = model.Price
             };
 
+            //here we are pulling the file that was uploaded with the ViewModel book data
+            //the file is part of the ViewModel and needs to be added to a new MemoryStream
+            //we use the MemoryStream by sending it to the _storage service for saving to Azure Storage
             using (var memoryStream = new MemoryStream())
             {
                 await model.CoverPictureImage.CopyToAsync(memoryStream);
@@ -56,14 +62,16 @@ namespace Tone.LibraryManagement.Web.Controllers
                     "CoverPhotos".ToLower(),
                     newBook.Id.ToString());
 
+                //make sure to save the URI location of the image in Azure Storage to the Book Entity
                 newBook.CoverPicture = picLocation;
             }
 
+            //save the book to the database using EF Core
             await _context.Books.AddAsync(newBook);
             await _context.SaveChangesAsync();
 
+            //when done, just redirect to Index action
             return RedirectToAction("Index");
-
         }
     }
 }
