@@ -1,9 +1,11 @@
 ﻿using Amazon;
 using Amazon.S3;
 using Amazon.S3.Transfer;
+using Microsoft.Extensions.Options;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Tone.LibraryManagement.Azure.Services.Options;
 using Tone.LibraryManagement.Core.Services;
 
 namespace Tone.LibraryManagement.AWS.Services
@@ -15,7 +17,7 @@ namespace Tone.LibraryManagement.AWS.Services
         private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
         private static IAmazonS3 _s3Client;
 
-        public AWSStorageService(IAmazonS3 s3Client)
+        public AWSStorageService(IAmazonS3 s3Client, IOptionsMonitor<AWSStorageOptions> options)
         {
             _s3Client = s3Client;
         }
@@ -34,8 +36,7 @@ namespace Tone.LibraryManagement.AWS.Services
         {
             try
             {
-                using (var fileTransferUtility =
-                    new TransferUtility(_s3Client))
+                using (var fileTransferUtility = new TransferUtility(_s3Client))
                 {
                     await fileTransferUtility.UploadAsync(fileContents, list[0], list[1]);
                     return string.Empty;

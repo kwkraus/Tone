@@ -4,10 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Tone.LibraryManagement.Azure.Services;
 using Tone.LibraryManagement.Azure.Services.Extensions;
-using Tone.LibraryManagement.Azure.Services.Options;
-using Tone.LibraryManagement.Core.Services;
 using Tone.LibraryManagement.Data.Contexts;
 
 namespace Tone.LibraryManagement.MVC
@@ -30,11 +27,20 @@ namespace Tone.LibraryManagement.MVC
                 options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
             );
 
-            //services.AddAzureStorageService(options =>
-            //    options.ConnectionString = Configuration["AzureStorage:ConnectionString"]);
+            services.AddAzureStorageService(Configuration.GetSection("AzureStorage"));
 
-            services.Configure<AzureStorageOptions>(Configuration.GetSection("AzureStorage"));
-            services.AddTransient(typeof(IStorageService), typeof(AzureStorageService));
+            // here's an example of how to register the AWSStorageService using options and extensions
+            //
+            //Method #1 - passing in IConfigurationSection
+            //services.AddAWSStorageService(Configuration.GetSection("AWSStorage"));
+            //
+            //Method #2 - Using a delegate function to define individual values.
+            //services.AddAWSStorageService(options =>
+            //    {
+            //        options.ServiceUrl = Configuration["AWSStorage:ServiceUrl"];
+            //        options.BucketName = Configuration["AWSStorage:BucketName"];
+            //    }
+            //);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

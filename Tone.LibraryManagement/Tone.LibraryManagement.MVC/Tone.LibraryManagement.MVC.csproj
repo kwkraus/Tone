@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tone.LibraryManagement.AWS.Services\Tone.LibraryManagement.AWS.Services.csproj" />
     <ProjectReference Include="..\Tone.LibraryManagement.Azure.Services\Tone.LibraryManagement.Azure.Services.csproj" />
     <ProjectReference Include="..\Tone.LibraryManagement.Core\Tone.LibraryManagement.Core.csproj" />
     <ProjectReference Include="..\Tone.LibraryManagement.Data\Tone.LibraryManagement.Data.csproj" />

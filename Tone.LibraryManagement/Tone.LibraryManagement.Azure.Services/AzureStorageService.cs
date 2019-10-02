@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
@@ -11,13 +12,25 @@ namespace Tone.LibraryManagement.Azure.Services
 {
     public class AzureStorageService : IStorageService
     {
+        private readonly ILogger<AzureStorageService> _logger;
+
         // Parse the connection string and return a reference to the storage account.
         private CloudStorageAccount _storageAccount;
 
-        public AzureStorageService(IOptionsMonitor<AzureStorageOptions> options)
+        public AzureStorageService(IOptionsMonitor<AzureStorageOptions> options,
+            ILogger<AzureStorageService> logger)
         {
+            _logger = logger;
             CloudStorageAccount.UseV1MD5 = false;
-            _storageAccount = CloudStorageAccount.Parse(options.CurrentValue.ConnectionString);
+
+            try
+            {
+                _storageAccount = CloudStorageAccount.Parse(options.CurrentValue.ConnectionString);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Failed to create CloudStorageAccount with connectionstring={options.CurrentValue.ConnectionString}: Message={ex.Message}");
+            }
         }
 
         public async Task<bool> DeleteFileIfExistsAsync(string blobUrl)
@@ -30,7 +43,7 @@ namespace Tone.LibraryManagement.Azure.Services
             }
             catch(Exception ex)
             {
-                //log reason why it failed
+                _logger.LogError(ex.Message);
                 return false;
             }
         }

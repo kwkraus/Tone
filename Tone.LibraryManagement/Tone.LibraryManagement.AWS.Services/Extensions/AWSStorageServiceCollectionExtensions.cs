@@ -1,29 +1,30 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Tone.LibraryManagement.AWS.Services;
 using Tone.LibraryManagement.Azure.Services.Options;
 using Tone.LibraryManagement.Core.Services;
 
 namespace Tone.LibraryManagement.Azure.Services.Extensions
 {
-    public static class AzureStorageServiceCollectionExtensions
+    public static class AWSStorageServiceCollectionExtensions
     {
-        public static void AddAzureStorageService(
+        public static void AddAWSStorageService(
             this IServiceCollection services, 
-            Action<AzureStorageOptions> configureOptions)
+            Action<AWSStorageOptions> configureOptions)
         {
             //Options bound and configured by a delegate
-            services.Configure<AzureStorageOptions>(configureOptions);
-            services.AddTransient(typeof(IStorageService), typeof(AzureStorageService));
+            services.Configure<AWSStorageOptions>(configureOptions);
+            services.AddTransient(typeof(IStorageService), typeof(AWSStorageService));
         }
 
-        public static void AddAzureStorageService(
+        public static void AddAWSStorageService(
             this IServiceCollection services,
             IConfigurationSection configureOptions)
         {
             //Options bound and configured by a delegate
-            services.Configure<AzureStorageOptions>(configureOptions);
-            services.AddTransient(typeof(IStorageService), typeof(AzureStorageOptions));
+            services.Configure<AWSStorageOptions>(configureOptions);
+            services.AddTransient(typeof(IStorageService), typeof(AWSStorageService));
         }
     }
 }
