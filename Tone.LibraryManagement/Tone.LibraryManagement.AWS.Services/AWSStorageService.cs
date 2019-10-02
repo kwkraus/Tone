@@ -12,7 +12,6 @@ namespace Tone.LibraryManagement.AWS.Services
 {
     public class AWSStorageService : IStorageService
     {
-        private const string bucketName = "*** provide bucket name ***";
         // Specify your bucket region (an example region is shown).
         private static readonly RegionEndpoint bucketRegion = RegionEndpoint.USWest2;
         private static IAmazonS3 _s3Client;
@@ -36,11 +35,9 @@ namespace Tone.LibraryManagement.AWS.Services
         {
             try
             {
-                using (var fileTransferUtility = new TransferUtility(_s3Client))
-                {
-                    await fileTransferUtility.UploadAsync(fileContents, list[0], list[1]);
-                    return string.Empty;
-                }
+                using var fileTransferUtility = new TransferUtility(_s3Client);
+                await fileTransferUtility.UploadAsync(fileContents, list[0], list[1]);
+                return string.Empty;
             }
             catch (AmazonS3Exception e)
             {

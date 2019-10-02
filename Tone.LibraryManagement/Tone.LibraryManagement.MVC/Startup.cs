@@ -27,7 +27,7 @@ namespace Tone.LibraryManagement.MVC
                 options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
             );
 
-            services.AddAzureStorageService(Configuration.GetSection("AzureStorage"));
+            services.AddAzureStorageService(options => Configuration.GetSection("AzureStorage").Bind(options));
 
             // here's an example of how to register the AWSStorageService using options and extensions
             //

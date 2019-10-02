@@ -13,7 +13,7 @@ namespace Tone.LibraryManagement.Azure.Services.Extensions
             Action<AzureStorageOptions> configureOptions)
         {
             //Options bound and configured by a delegate
-            services.Configure<AzureStorageOptions>(configureOptions);
+            services.Configure(configureOptions);
             services.AddTransient(typeof(IStorageService), typeof(AzureStorageService));
         }
 
