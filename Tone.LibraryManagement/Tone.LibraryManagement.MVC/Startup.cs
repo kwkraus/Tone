@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Tone.LibraryManagement.Azure.Services;
+using Tone.LibraryManagement.Azure.Services.Extensions;
 using Tone.LibraryManagement.Azure.Services.Options;
 using Tone.LibraryManagement.Core.Services;
 using Tone.LibraryManagement.Data.Contexts;
@@ -33,6 +29,9 @@ namespace Tone.LibraryManagement.MVC
             services.AddDbContext<LibraryMgmtContext>(
                 options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
             );
+
+            //services.AddAzureStorageService(options =>
+            //    options.ConnectionString = Configuration["AzureStorage:ConnectionString"]);
 
             services.Configure<AzureStorageOptions>(Configuration.GetSection("AzureStorage"));
             services.AddTransient(typeof(IStorageService), typeof(AzureStorageService));
