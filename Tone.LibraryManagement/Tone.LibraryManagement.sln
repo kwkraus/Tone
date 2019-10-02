@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tone.LibraryManagement.WebApi", "Tone.LibraryManagement.WebApi\Tone.LibraryManagement.WebApi.csproj", "{80986694-3300-423D-B77A-53FDF2FF6392}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tone.LibraryManagement.Data", "Tone.LibraryManagement.Data\Tone.LibraryManagement.Data.csproj", "{1BBEA4E9-0742-4FE8-968B-80A6BDAE4210}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tone.LibraryManagement.Core", "Tone.LibraryManagement.Core\Tone.LibraryManagement.Core.csproj", "{6300AEE3-60C2-4CF3-AE10-49C4E5C9E67E}"
@@ -13,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tone.LibraryManagement.AWS.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tone.LibraryManagement.Azure.Services", "Tone.LibraryManagement.Azure.Services\Tone.LibraryManagement.Azure.Services.csproj", "{29069D45-C680-4DE2-9554-B7D0ED618273}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tone.LibraryManagement.MVC", "Tone.LibraryManagement.MVC\Tone.LibraryManagement.MVC.csproj", "{AAAA28AD-6394-4EB3-84DC-0577D7041722}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tone.LibraryManagement.MVC", "Tone.LibraryManagement.MVC\Tone.LibraryManagement.MVC.csproj", "{AAAA28AD-6394-4EB3-84DC-0577D7041722}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tone.LibraryManagement.Api", "Tone.LibraryManagement.Api\Tone.LibraryManagement.Api.csproj", "{4B8DCC80-80F7-4AD7-A59D-25702F285895}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{80986694-3300-423D-B77A-53FDF2FF6392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80986694-3300-423D-B77A-53FDF2FF6392}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80986694-3300-423D-B77A-53FDF2FF6392}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80986694-3300-423D-B77A-53FDF2FF6392}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1BBEA4E9-0742-4FE8-968B-80A6BDAE4210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1BBEA4E9-0742-4FE8-968B-80A6BDAE4210}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BBEA4E9-0742-4FE8-968B-80A6BDAE4210}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{AAAA28AD-6394-4EB3-84DC-0577D7041722}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAAA28AD-6394-4EB3-84DC-0577D7041722}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAAA28AD-6394-4EB3-84DC-0577D7041722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B8DCC80-80F7-4AD7-A59D-25702F285895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B8DCC80-80F7-4AD7-A59D-25702F285895}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B8DCC80-80F7-4AD7-A59D-25702F285895}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B8DCC80-80F7-4AD7-A59D-25702F285895}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Tone.LibraryManagement.Core.Repositories;
 using Tone.LibraryManagement.Data.Entities;
 
-namespace Tone.LibraryManagement.WebApi.Controllers
+namespace Tone.LibraryManagement.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
