@@ -1,6 +1,6 @@
 using System;
 
-namespace Tone.LibraryManagement.Web.Models
+namespace Tone.LibraryManagement.MVC.Models
 {
     public class ErrorViewModel
     {

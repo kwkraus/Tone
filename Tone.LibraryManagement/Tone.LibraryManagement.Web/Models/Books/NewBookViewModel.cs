@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace Tone.LibraryManagement.Web.Models.Books
+namespace Tone.LibraryManagement.MVC.Models.Books
 {
     public class NewBookViewModel
     {

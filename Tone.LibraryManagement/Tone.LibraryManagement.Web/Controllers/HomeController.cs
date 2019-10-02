@@ -1,18 +1,13 @@
-﻿using Microsoft.ApplicationInsights;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using Tone.LibraryManagement.Web.Models;
+using Tone.LibraryManagement.MVC.Models;
 
-namespace Tone.LibraryManagement.Web.Controllers
+namespace Tone.LibraryManagement.MVC.Controllers
 {
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
-            var client = new TelemetryClient();
-            
-            client.TrackEvent("This is an event from the telemetry client for my demo with Ashley Shorter");
-
             return View();
         }
 

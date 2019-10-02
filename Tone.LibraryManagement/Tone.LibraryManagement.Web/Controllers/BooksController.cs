@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Tone.LibraryManagement.Core.Services;
 using Tone.LibraryManagement.Data.Contexts;
 using Tone.LibraryManagement.Data.Entities;
-using Tone.LibraryManagement.Web.Models.Books;
+using Tone.LibraryManagement.MVC.Models.Books;
 
-namespace Tone.LibraryManagement.Web.Controllers
+namespace Tone.LibraryManagement.MVC.Controllers
 {
     public class BooksController : Controller
     {
